@@ -4,7 +4,7 @@ function Navbar() {
   return (
     <nav className="Navbar">
       <img src={logo} className="App-logo" alt="logo" />
-      <h1>What I gotta do.</h1>
+      <h1>What's On The List?</h1>
     </nav>
   );
 }
