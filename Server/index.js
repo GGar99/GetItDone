@@ -8,7 +8,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-mongoose.connect('mongodb://127.0.0.1:27017/TodoDB')
+mongoose.connect('mongodb+srv://Admin1:Adminpass2412@cluster0.tgztujp.mongodb.net/TodoDB')
 
 //get all Todos
 app.get('/get', (req, res) => {
