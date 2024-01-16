@@ -1,0 +1,106 @@
+.App {
+  background-color: black;
+}
+
+.App-logo {
+  height: 30vmin;
+  /* width: 100px; */
+  pointer-events: none;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 33vh;
+  width: 100%;
+  text-align: center;
+}
+
+.form-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:start;
+  height: 33vh;
+  width: 100%;
+  text-align: center;
+}
+
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 10s linear;
+  }
+}
+
+body {
+  background-color: black;
+  margin: 0;
+  padding: 0;
+  color: white;
+}
+
+.navbar {
+  background-color: #000000;
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content: center;
+  /* font-size: calc(10px + 2vmin); */
+  color: white;
+  width: 100%;
+}
+
+.todo-list button, input[type='text'] {
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.todo-form button {
+  background-color: pink;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: pink;
+  color: black;
+  /* height: 35px; */
+  padding: 2px 5px;
+  margin:10px 0px;
+}
+
+/* .task div icon {
+  cursor: pointer;
+} */
+
+.checkbox {
+  display: flex;
+  align-items: center;
+
+}
+
+.checkbox .icon {
+  margin-right: 10pxS;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
