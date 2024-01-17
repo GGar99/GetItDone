@@ -6,7 +6,8 @@ function TodoList({ todos, onEditTodo, onDeleteTodo }) {
     <div className="todo-list">
       {todos.map(todo => (
         <div key={todo.id} className="todo-item">
-          <span className={`todo-text ${todo.done ? 'completed' : ''}`} onClick={() => onEditTodo(todo.id)}>
+          <span className={`todo-text ${todo.done ? 'completed' : ''}`}
+            onClick={() => onEditTodo(todo.id)}>
             <CircleFill className='icon' />
             {todo.todo}
           </span>

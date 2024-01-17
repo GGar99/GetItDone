@@ -6,81 +6,84 @@ function TodoApp() {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
-    // Fetch todos from the backend
-    fetch('http://localhost:3001/get')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        const formattedTodos = data.map(todo => ({
-          ...todo,
-          id: todo._id
-        }));
-        setTodos(formattedTodos);
-      })
-      .catch(err => console.error(err));
+    const token = localStorage.getItem('token');
+    fetch('http://localhost:3001/get', {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      setTodos(data);
+    })
+    .catch(err => console.error(err));
   }, []);
 
+
   const addTodo = async (newTodoText) => {
+  try {
+    const token = localStorage.getItem('token');
+    const response = await fetch('http://localhost:3001/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({ todo: newTodoText }),
+    });
 
-    try {
-      const response = await fetch('http://localhost:3001/add', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({todo: newTodoText}), //Send the task in the request body
-      });
+    if (!response.ok) {
+      const responseText = await response.text(); // Read the response once
+      console.log('Response payload:', responseText); // Use the stored response
+      throw new Error('Network response was not ok');
+    }
 
-      if (response.ok) {
-        const addedTodo = await response.json();
-        console.log(addedTodo);
-        setTodos([...todos, { ...addedTodo, id: addedTodo._id }]); // Add the new todo with formatted ID to the state
-      } else {
-        throw new Error('Network response was not ok'); //Handle http errors
-      }
-    } catch (error) {
-      console.log(error); //Handle network errors
-
+    const addedTodo = await response.json(); // Read the response here if it's ok
+    console.log('Added todo:', addedTodo);
+    setTodos([...todos, { ...addedTodo, id: addedTodo._id }]);
+  } catch (error) {
+    console.error('Error in addTodo:', error);
   }
-  };
+};
+
+
 
   const editTodo = (id, doneStatus) => {
-    //log current todos to inspect them
     console.log('Current todos:', todos);
-    //find todo item by id
+
     const todo = todos.find((item) => item.id === id);
     if (!todo) {
       console.log('Todo item not found');
       return;
     }
 
-    //Toggle the 'done' status
-    const updatedTodo = {...todo, done: !todo.done };
+    const updatedTodo = { ...todo, done: !todo.done }; // Update with todo text and done status
 
-    //send the updated todo item to the server
+    const token = localStorage.getItem('token'); // Retrieve the JWT token from localStorage
     fetch(`http://localhost:3001/update/${todo._id}`, {
       method: 'PUT',
       headers: {
-        'Content-type': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`, // Include the JWT token in the Authorization header
       },
       body: JSON.stringify(updatedTodo),
     })
     .then(response => {
-      if(!response.ok) {
+      if (!response.ok) {
         throw new Error('Network response was not ok');
       }
       return response.json();
     })
     .then(updatedItem => {
-      // Update the state with the new todo list
       setTodos(todos.map((item) => item.id === id ? updatedItem : item));
     })
     .catch(err => console.log(err));
-  };
+};
 
   const deleteTodo = async (id) => {
     console.log("ID received for deletion:", id); // For debugging

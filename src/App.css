@@ -18,10 +18,13 @@
   text-align: center;
 }
 
+.completed {
+  text-decoration: line-through;
+}
+
 
 .todo-list {
   min-width: 33vh;
-
 }
 
 .todo-text.completed {
@@ -51,7 +54,7 @@
 
 }
 
-.forms-container button, input[type='email'], input[type='password'] {
+.forms-container button, input[type='email'], input[type='password'], input[type='text'] {
   border-radius: 5px;
   padding: 20px 10px;
   width: 15vh;
@@ -95,17 +98,15 @@ body {
   width: 33vh;
 }
 
-.todo-form button, input[type='text'] {
-  border-radius: 5px;
-  padding: 20px 10px;
-  width: 33vh;
-  border-radius: 15px;
-}
 
 .todo-form button {
   background-color: pink;
   cursor: pointer;
   width: 10vh;
+  border-radius: 5px;
+  padding: 20px 10px;
+  width: 33vh;
+  border-radius: 15px;
 }
 
 .todo-item {
