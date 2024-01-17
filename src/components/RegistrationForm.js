@@ -29,31 +29,29 @@ function RegistrationForm() {
   };
 
   return (
-    <div>
-      <h2>Register</h2>
-      {message && <p>{message}</p>}
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email:
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Password:
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        <button type="submit">Register</button>
-      </form>
-    </div>
+    <form className='user-form' onSubmit={handleSubmit}>
+    <h2>Register</h2>
+    {message && <p>{message}</p>}
+      <label>
+        <input
+          type="email"
+          value={email}
+          placeholder='Email'
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+      </label>
+      <label>
+        <input
+          type="password"
+          value={password}
+          placeholder='Password'
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+      </label>
+      <button type="submit">Register</button>
+    </form>
   );
 }
 

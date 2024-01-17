@@ -4,6 +4,8 @@ const cors = require('cors')
 const TodoModel = require('./Models/Todo.js')
 const bcrypt = require('bcryptjs')
 const User = require('./Models/User.js')
+const jwt = require('jsonwebtoken')
+const secretKey = process.env.JWT_SECRET || 'my-secret-key';
 
 
 const app = express()
@@ -72,6 +74,31 @@ app.post('/register', async (req,res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
+// In your server-side login route
+app.post('/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email: email });
+
+    if (user && bcrypt.compareSync(password, user.password)) {
+      // Passwords match
+      const payload = { userId: user._id };
+
+      // Sign the JWT token and populate the payload with the user ID
+      const token = jwt.sign(payload, secretKey, { expiresIn: '1h' });
+
+      //Send the token to the client
+      res.json({ message: 'Login successful', token });
+    } else {
+      // Passwords don't match or user does not exist
+      res.status(401).json({ message: 'Invalid email or password' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 
 app.listen(3001, () => {
   console.log("Server is running 🚀")

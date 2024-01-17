@@ -40,6 +40,34 @@
   text-align: center;
 }
 
+.start-page-title {
+  display: flex;
+  justify-content: center;
+}
+
+.forms-container {
+  display: flex;
+  justify-content: center;
+
+}
+
+.forms-container button, input[type='email'], input[type='password'] {
+  border-radius: 5px;
+  padding: 20px 10px;
+  width: 15vh;
+  border-radius: 15px;
+}
+
+.forms-container button {
+  background-color: pink;
+  cursor: pointer;
+  width: 10vh;
+}
+
+.user-form {
+  display: flex;
+  flex-direction: column;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
