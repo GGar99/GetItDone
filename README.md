@@ -18,7 +18,7 @@ Get It Done is a collaborative task management tool designed for efficient track
 - MongoDB access
 
 ### Installation
-1. Clone the repo: `git clone https://github.com/your-username/get-it-done.git`
+1. Clone the repo: `git clone https://github.com/GGar99/GetItDone.git`
 2. Install dependencies: `npm install`
 ...
 
